@@ -1,7 +1,7 @@
 
 ## <a name="introduction">🤖 Introduction</a>
 
-Ce projet met en œuvre une application web de magasin en ligne utilisant Next.js et l'API fakestoreapi.com. L'objectif est de fournir une expérience utilisateur fluide et conviviale pour explorer et interagir avec une variété de produits fictifs.
+Ce projet met en œuvre une application web de magasin en ligne utilisant ReactNative et l'API fakestoreapi.com. L'objectif est de fournir une expérience utilisateur fluide et conviviale pour explorer et interagir avec une variété de produits fictifs.
 
 ## <a name="tech-stack">⚙️ Tech Stack</a>
 
