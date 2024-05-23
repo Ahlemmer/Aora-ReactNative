@@ -1,12 +1,7 @@
 
 ## <a name="introduction">🤖 Introduction</a>
 
-Built with React Native for seamless user experiences, Animatable for captivating animations, and integrated with the dependable backend systems of Appwrite,
-this app showcases impressive design and functionality, enabling seamless sharing of AI videos within the community.
-
-If you're getting started and need assistance or face any bugs, join our active Discord community with over 27k+ members. It's a place where people help each other out.
-
-<a href="https://discord.com/invite/n6EdbFJ" target="_blank"><img src="https://github.com/sujatagunale/EasyRead/assets/151519281/618f4872-1e10-42da-8213-1d69e486d02e" /></a>
+Ce projet met en œuvre une application web de magasin en ligne utilisant Next.js et l'API fakestoreapi.com. L'objectif est de fournir une expérience utilisateur fluide et conviviale pour explorer et interagir avec une variété de produits fictifs.
 
 ## <a name="tech-stack">⚙️ Tech Stack</a>
 
@@ -17,28 +12,17 @@ If you're getting started and need assistance or face any bugs, join our active 
 - FakeStoreApi
 
 ## <a name="features">🔋 Features</a>
+👉 **Écran de bienvenue (Onboarding)** : un Écran attrayant et des instructions claires accueillent les utilisateurs dans l'application.
 
-👉 **Onboarding Screen**: Engaging graphics and clear instructions welcome users to the app.
+👉 **Ecran de Connexion**:Permet aux utilisateurs de s'authentifier pour accéder à l'application. Les informations d'identification sont requises pour garantir la sécurité et l'accès approprié aux fonctionnalités de gestion des produits.
+👉 **Opérations CRUD**: effectuer des opérations CRUD (Créer, Lire, Mettre à Jour, Supprimer) pour gérer les produits.
 
-👉 **Robust Authentication & Authorization System**: Secure email login safeguards user accounts.
+👉 **Capacité de recherche plein texte** : Recherchez efficacement des  produits .
 
-👉 **Dynamic Home Screen with Animated Flat List**: Smoothly animated flat list showcases the latest videos for seamless browsing.
+👉 **Navigation par onglets** : Naviguez facilement entre les sections telles que Accueil, Recherche et Profil grâce à la navigation par onglets
 
-👉 **Pull-to-Refresh Functionality**: Users can refresh content with a simple pull gesture for up-to-date information.
+👉 **Animations** : Des animations dynamiques utilisant la bibliothèque Animatable pour améliorer l'interaction et l'engagement des utilisateurs tout au long de l'interface utilisateur de l'application.
 
-👉 **Full-Text Search Capability**: Efficiently search through videos with real-time suggestions and instant results.
-
-👉 **Tab Navigation**: Navigate between sections like Home, Search, and Profile with ease using tab navigation.
-
-👉 **Post Creation Screen for Uploading Media**: Upload video and image Products directly from the app with integrated media selection.
-
-👉 **Profile Screen with Detailed Insights**: View account details and activity, including uploaded videos and follower count, for a personalized experience.
-
-👉 **Responsiveness**: Smooth performance and adaptability across various devices and screen sizes for a consistent user experience.
-
-👉 **Animations**: Dynamic animations using the Animatable library to enhance user interaction and engagement throughout the app's UI.
-
-and many more, including code architecture and reusability
 
 ## <a name="quick-start">🤸 Quick Start</a>
 
@@ -55,8 +39,8 @@ Make sure you have the following installed on your machine:
 **Cloning the Repository**
 
 ```bash
-git clone https://github.com/adrianhajdin/aora.git
-cd aora
+git clone https://github.com/Ahlemmer/Aora-ReactNative.git
+cd Aora-ReactNative
 ```
 
 **Installation**
@@ -70,7 +54,7 @@ npm install
 **Running the Project**
 
 ```bash
-npm start
+npm start or npm run android
 ```
 
 **Expo Go**
