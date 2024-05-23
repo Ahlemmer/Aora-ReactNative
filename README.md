@@ -30,7 +30,7 @@
 
 ## 🚨 Tutorial
 
-This repository contains the code corresponding to an in-depth tutorial available on our YouTube channel, <a href="https://www.youtube.com/@javascriptmastery/videos" target="_blank"><b>JavaScript Mastery</b></a>. 
+This repository contains the code corresponding to an in-depth tutorial available on our YouTube channel, <a href="https://www.youtube.com/@javascriptmastery/videos" target="_blank"><b>JavaScript Mastery</b></a>.
 
 If you prefer visual learning, this is the perfect resource for you. Follow our tutorial to learn how to build projects like these step-by-step in a beginner-friendly manner!
 
@@ -38,7 +38,7 @@ If you prefer visual learning, this is the perfect resource for you. Follow our 
 
 ## <a name="introduction">🤖 Introduction</a>
 
-Built with React Native for seamless user experiences, Animatable for captivating animations, and integrated with the dependable backend systems of Appwrite, 
+Built with React Native for seamless user experiences, Animatable for captivating animations, and integrated with the dependable backend systems of Appwrite,
 this app showcases impressive design and functionality, enabling seamless sharing of AI videos within the community.
 
 If you're getting started and need assistance or face any bugs, join our active Discord community with over 27k+ members. It's a place where people help each other out.
@@ -67,7 +67,7 @@ If you're getting started and need assistance or face any bugs, join our active 
 
 👉 **Tab Navigation**: Navigate between sections like Home, Search, and Profile with ease using tab navigation.
 
-👉 **Post Creation Screen for Uploading Media**: Upload video and image posts directly from the app with integrated media selection.
+👉 **Post Creation Screen for Uploading Media**: Upload video and image Products directly from the app with integrated media selection.
 
 👉 **Profile Screen with Detailed Insights**: View account details and activity, including uploaded videos and follower count, for a personalized experience.
 
@@ -75,7 +75,7 @@ If you're getting started and need assistance or face any bugs, join our active 
 
 👉 **Animations**: Dynamic animations using the Animatable library to enhance user interaction and engagement throughout the app's UI.
 
-and many more, including code architecture and reusability 
+and many more, including code architecture and reusability
 
 ## <a name="quick-start">🤸 Quick Start</a>
 
@@ -95,6 +95,7 @@ Make sure you have the following installed on your machine:
 git clone https://github.com/adrianhajdin/aora.git
 cd aora
 ```
+
 **Installation**
 
 Install the project dependencies using npm:

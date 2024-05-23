@@ -28,14 +28,8 @@ const Welcome = () => {
             resizeMode="contain"
           />
 
-          <Image
-            source={images.cards}
-            className="max-w-[380px] w-full h-[298px]"
-            resizeMode="contain"
-          />
-
           <View className="relative mt-5">
-            <Text className="text-3xl text-white font-bold text-center">
+            <Text className="text-3xl text-black-100 font-bold text-center">
               Discover Endless{"\n"}
               Possibilities with{" "}
               <Text className="text-secondary-200">Aora</Text>
@@ -47,11 +41,6 @@ const Welcome = () => {
               resizeMode="contain"
             />
           </View>
-
-          <Text className="text-sm font-pregular text-gray-100 mt-7 text-center">
-            Where Creativity Meets Innovation: Embark on a Journey of Limitless
-            Exploration with Aora
-          </Text>
 
           <CustomButton
             title="Continue with Email"

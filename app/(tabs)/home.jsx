@@ -1,88 +1,189 @@
-import { useState } from "react";
+import { memo, useCallback, useEffect, useRef, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { FlatList, Image, RefreshControl, Text, View } from "react-native";
+import { FlatList, RefreshControl, View } from "react-native";
 
-import { images } from "../../constants";
-import useAppwrite from "../../lib/useAppwrite";
-import { getAllPosts, getLatestPosts } from "../../lib/appwrite";
-import { EmptyState, SearchInput, Trending, VideoCard } from "../../components";
+import useApi from "../../lib/useApI";
+import {
+  Categories,
+  EmptyState,
+  FilterModal,
+  Header,
+  SearchInput,
+} from "../../components";
+import { getAllProducts, sortProducts } from "../../lib/api";
+import Card from "../../components/Card";
+import { debounce } from "lodash";
 
 const Home = () => {
-  const { data: posts, refetch } = useAppwrite(getAllPosts);
-  const { data: latestPosts } = useAppwrite(getLatestPosts);
+  const { data: Products, refetch } = useApi(getAllProducts);
 
   const [refreshing, setRefreshing] = useState(false);
+  const [active, setActive] = useState(null);
+  const [filter, setFilter] = useState(null);
 
-  const onRefresh = async () => {
+  const [product, setProduct] = useState([]);
+  const [query, setQuery] = useState("");
+
+  useEffect(() => {
+    if (Products) {
+      setProduct(Products);
+    }
+  }, [Products]);
+
+  useEffect(() => {
+    if (query.length === 0) {
+      if (active) {
+        handleChangeCategory(active);
+      } else {
+        setProduct(Products);
+      }
+    }
+  }, [query, Products, active]);
+
+  const handleChangeCategory = useCallback(
+    (cat) => {
+      setActive(cat);
+      setQuery("");
+      if (cat) {
+        const filteredResults = Products.filter(
+          (item) => item.category.toLowerCase() === cat.toLowerCase()
+        );
+        setProduct(filteredResults);
+      } else {
+        setProduct(Products);
+      }
+    },
+    [Products]
+  );
+
+  const modalRef = useRef(null);
+
+  const openFilterModal = useCallback(() => {
+    modalRef.current?.present();
+  }, []);
+
+  const closeFilterModal = useCallback(() => {
+    modalRef.current?.close();
+  }, []);
+
+  const applyFilter = useCallback(async () => {
+    if (filter) {
+      if (filter.order) {
+        const sort = filter.order === "popular" ? "desc" : "asc";
+        const response = await sortProducts(sort);
+        setProduct(response);
+      }
+    }
+    closeFilterModal();
+  }, [closeFilterModal, filter]);
+
+  const resetFilter = useCallback(() => {
+    setProduct(Products);
+    setActive(null);
+    setFilter(null);
+    closeFilterModal();
+  }, [closeFilterModal]);
+
+  const onRefresh = useCallback(async () => {
     setRefreshing(true);
     await refetch();
     setRefreshing(false);
-  };
+  }, [refetch]);
 
-  // one flatlist
-  // with list header
-  // and horizontal flatlist
+  const handleSearch = useCallback(
+    debounce((text) => {
+      setQuery(text);
 
-  //  we cannot do that with just scrollview as there's both horizontal and vertical scroll (two flat lists, within trending)
+      if (text.length > 2) {
+        const filteredResults = Products.filter((item) => {
+          return (
+            item.title.toLowerCase().includes(text.toLowerCase()) ||
+            item.description.toLowerCase().includes(text.toLowerCase()) ||
+            item.category.toLowerCase().includes(text.toLowerCase()) ||
+            item.price.toString().includes(text) ||
+            item.rating.rate.toString().includes(text)
+          );
+        });
+        setProduct(filteredResults);
+      }
+    }, 400),
+    [Products]
+  );
+
+  const backToHomePage = useCallback(() => {
+    setProduct(Products);
+    setQuery("");
+  }, [Products]);
+
+  const renderItem = useCallback(
+    ({ item }) => (
+      <Card
+        image={item?.image}
+        title={item?.title}
+        rating={item?.rating?.rate}
+        id={item?.id}
+      />
+    ),
+    []
+  );
+
+  const uniqueCategories = [
+    ...new Set(Products?.map((product) => product.category)),
+  ];
 
   return (
-    <SafeAreaView className="bg-primary">
-      <FlatList
-        data={posts}
-        keyExtractor={(item) => item.$id}
-        renderItem={({ item }) => (
-          <VideoCard
-            title={item.title}
-            thumbnail={item.thumbnail}
-            video={item.video}
-            creator={item.creator.username}
-            avatar={item.creator.avatar}
-          />
-        )}
-        ListHeaderComponent={() => (
-          <View className="flex my-6 px-4 space-y-6">
-            <View className="flex justify-between items-start flex-row mb-6">
-              <View>
-                <Text className="font-pmedium text-sm text-gray-100">
-                  Welcome Back
-                </Text>
-                <Text className="text-2xl font-psemibold text-white">
-                  JSMastery
-                </Text>
-              </View>
+    <SafeAreaView className="h-full bg-primary">
+      <View className="flex px-4 space-y-6 pt-2">
+        <Header openFilterModal={openFilterModal} />
+        <SearchInput
+          setQuery={setQuery}
+          handleSearch={handleSearch}
+          query={query}
+        />
 
-              <View className="mt-1.5">
-                <Image
-                  source={images.logoSmall}
-                  className="w-9 h-10"
-                  resizeMode="contain"
-                />
-              </View>
-            </View>
-
-            <SearchInput />
-
-            <View className="w-full flex-1 pt-5 pb-8">
-              <Text className="text-lg font-pregular text-gray-100 mb-3">
-                Latest Videos
-              </Text>
-
-              <Trending posts={latestPosts ?? []} />
-            </View>
+        {!query && (
+          <View className="w-full pt-2 pb-2">
+            <Categories
+              active={active}
+              handleChangeCategory={handleChangeCategory}
+              categories={uniqueCategories}
+            />
           </View>
         )}
+      </View>
+      <FlatList
+        data={product}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id.toString()}
+        numColumns={2}
+        initialNumToRender={10}
+        showsVerticalScrollIndicator={false}
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={{
+          justifyContent: "center",
+          paddingHorizontal: 10,
+        }}
         ListEmptyComponent={() => (
           <EmptyState
-            title="No Videos Found"
-            subtitle="No videos created yet"
+            title="No Product Found"
+            subtitle="No Product added yet"
+            backToHome={backToHomePage}
           />
         )}
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
       />
+      <FilterModal
+        modalRef={modalRef}
+        filter={filter}
+        setFilter={setFilter}
+        onClose={closeFilterModal}
+        applyFilter={applyFilter}
+        onReset={resetFilter}
+      />
     </SafeAreaView>
   );
 };
 
-export default Home;
+export default memo(Home);

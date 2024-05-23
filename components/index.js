@@ -1,19 +1,23 @@
-import VideoCard from "./VideoCard";
 import FormField from "./FormField";
 import CustomButton from "./CustomButton";
-import InfoBox from "./InfoBox";
+import ModalComponent from "./Modal.jsx";
 import Loader from "./Loader";
-import Trending from "./Trending";
+import Header from "./Header";
 import SearchInput from "./SearchInput";
 import EmptyState from "./EmptyState";
+import Categories from "./Categories";
+import Card from "./Card";
+import FilterModal from "./FilterModal";
 
 export {
-  VideoCard,
   FormField,
   CustomButton,
-  InfoBox,
+  ModalComponent,
   Loader,
-  Trending,
-  SearchInput,
+  Header,
   EmptyState,
+  SearchInput,
+  Categories,
+  Card,
+  FilterModal,
 };
