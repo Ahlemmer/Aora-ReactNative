@@ -51,6 +51,11 @@ Install the project dependencies using npm:
 npm install
 ```
 
+```bash
+#.env
+EXPO_PUBLIC_API_URL=https://fakestoreapi.com
+```
+
 **Running the Project**
 
 ```bash
